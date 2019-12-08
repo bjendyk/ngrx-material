@@ -1,5 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark } from '../model/bookmark';
+import { Bookmark } from '../model/bookmark.entity';
 
-export const addBookmark = createAction('[Bookmark] add bookmark', props<{ bookmark: Bookmark }>());
-export const deleteBookmark = createAction('[Bookmark] delete bookmark', props<{ bookmark: Bookmark }>());
+const addBookmark = createAction('[Bookmark] add bookmark', props<{ bookmark: Bookmark }>());
+const deleteBookmark = createAction('[Bookmark] delete bookmark', props<{ name: string }>());
+
+export const BookmarkActions = {
+  addBookmark,
+  deleteBookmark
+};

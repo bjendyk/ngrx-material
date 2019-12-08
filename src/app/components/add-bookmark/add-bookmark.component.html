@@ -7,8 +7,11 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>URL</mat-label>
-    <input matInput [(ngModel)]="url" #inputUrl="ngModel" required/>
-    <mat-error *ngIf="inputUrl.invalid && (inputUrl.dirty || inputUrl.touched)">URL is required</mat-error>
+    <input matInput [(ngModel)]="url" #inputUrl="ngModel" required url/>
+    <mat-error *ngIf="inputUrl.invalid && (inputUrl.dirty || inputUrl.touched)">
+      <div *ngIf="inputUrl.errors.required">URL is required</div>
+      <div *ngIf="inputUrl.errors.url">This is not a valid URL</div>
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Group</mat-label>
@@ -22,14 +25,9 @@
 
   <div class="buttons">
     <button mat-raised-button color="primary"
-            [disabled]="!isFormValid()"
+            [disabled]="inputName.invalid || inputUrl.invalid || selectGroup.invalid"
             (click)="onCreate()">
       Create
-    </button>
-    <button mat-button
-            [disabled]="!isFormValid()"
-            (click)="onCreateAndStay()">
-      Create and stay
     </button>
     <button mat-button (click)="onCancel()">Cancel</button>
   </div>

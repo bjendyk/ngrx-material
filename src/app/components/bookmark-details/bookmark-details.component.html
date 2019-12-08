@@ -12,10 +12,16 @@
     <mat-form-field>
       <input readonly matInput placeholder="URL" [value]="bookmark.url">
     </mat-form-field>
-    <a mat-stroked-button target="_blank" [href]="bookmark.url" color="primary">Open</a>
   </div>
 
   <mat-action-row>
+    <a mat-stroked-button
+       target="_blank"
+       [href]="bookmark.url"
+       color="primary"
+       matTooltip="Open in new tab">
+      Navigate
+    </a>
     <button mat-button color="primary" (click)="onDelete(bookmark)">
       <mat-icon>delete</mat-icon><span>Delete</span>
     </button>

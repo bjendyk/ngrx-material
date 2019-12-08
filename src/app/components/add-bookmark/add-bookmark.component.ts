@@ -21,7 +21,7 @@ export class AddBookmarkComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.groups = this.bookmarkService.getGroupNames();
+    this.groups = BookmarkService.getGroupNames();
   }
 
   onCreate() {
@@ -31,22 +31,7 @@ export class AddBookmarkComponent implements OnInit {
     });
   }
 
-  onCreateAndStay() {
-    this.bookmarkService.createBookmark(this.name, this.url, this.selectedGroup);
-    this.snackBar.open('Bookmark created.', 'OK', { duration: Constants.SNACKBAR_TIMEOUT });
-
-    this.name = '';
-    this.url = '';
-    this.selectedGroup = '';
-  }
-
   onCancel() {
     this.router.navigateByUrl('/bookmarks');
-  }
-
-  isFormValid() {
-    return this.name && this.name.length > 0 &&
-      this.url && this.url.length > 0 &&
-      this.selectedGroup && this.selectedGroup.length > 0;
   }
 }

@@ -1,89 +1,82 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector, createReducer,
-  createSelector,
-  MetaReducer, on
-} from '@ngrx/store';
-import { environment } from '../../environments/environment';
-import { Bookmark } from '../model/bookmark';
-import { addBookmark } from '../actions';
+import { createReducer, createSelector, on } from '@ngrx/store';
+
+import { Bookmark } from '../model/bookmark.entity';
+import { BookmarkActions } from './actions';
 import { Group } from '../model/group.enum';
 
 export interface State {
   bookmarks: Array<Bookmark>;
 }
 
-// export const reducers: ActionReducerMap<State> = {
-//
-// };
-
-
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
 export const initialState: State = {
   bookmarks: [
     {
-      name: 'xnxx',
-      url: 'http://xnxx.com',
+      name: 'Suzuki SV650',
+      url: 'https://en.wikipedia.org/wiki/Suzuki_SV650',
       group: Group.Leisure
     },
     {
-      name: 'pornhub',
-      url: 'http://pornhub.com',
+      name: 'Wakacje.pl',
+      url: 'https://wakacje.pl',
       group: Group.Leisure
     },
     {
-      name: 'PKO BP',
-      url: 'https://ipko.pl',
-      group: Group.Banking
+      name: 'Gmail',
+      url: 'https://gmail.com',
+      group: Group.Personal
     },
     {
-      name: 'ING',
-      url: 'https://ing.pl',
-      group: Group.Banking
+      name: 'Proton Mail',
+      url: 'https://protonmail.ch',
+      group: Group.Personal
     },
     {
-      name: 'mBank',
-      url: 'https://mbank.pl',
-      group: Group.Banking
-    },
-    {
-      name: 'CCN',
-      url: 'https://ccn.com',
-      group: Group.Crypto
-    },
-    {
-      name: 'Bitcoin',
-      url: 'http://bitcoin.org',
-      group: Group.Crypto
-    },
-    {
-      name: 'Litecoin',
-      url: 'http://litecoin.org',
-      group: Group.Crypto
-    },
-    {
-      name: 'pracuj.pl',
-      url: 'http://pracuj.pl',
+      name: 'Coders Lab',
+      url: 'https://coderslab.pl',
       group: Group.Work
     },
     {
       name: 'Onwelo',
-      url: 'http://onwelo.com',
+      url: 'https://onwelo.com',
+      group: Group.Work
+    },
+    {
+      name: 'Angular',
+      url: 'https://angular.io',
+      group: Group.Work
+    },
+    {
+      name: 'Angular Material',
+      url: 'https://material.angular.io',
       group: Group.Work
     }
   ]
 };
 
-const bookmarkReducer = createReducer(initialState,
-  on(addBookmark, (state, { bookmark }) => (
-    {
-      ...state, bookmarks: [...state.bookmarks, bookmark]
+const reducer = createReducer(initialState,
+  on(BookmarkActions.addBookmark, (state, { bookmark }) => ({
+      ...state,
+      bookmarks: [...state.bookmarks, bookmark]
     })
-  )
+  ),
+  on(BookmarkActions.deleteBookmark, (state, { name }) => ({
+      ...state,
+      bookmarks: state.bookmarks.filter(item => item.name !== name)
+    })
+  ),
 );
 
-export function reducer(state, action) {
-  return bookmarkReducer(state, action);
+export function bookmarkReducer(state, action) {
+  return reducer(state, action);
 }
+
+export const selectAllBookmarks = (state: State) => state.bookmarks;
+
+export const selectBookmarks = createSelector(
+  selectAllBookmarks,
+  (state: any, props) => {
+    if (props.group) {
+      return state.bookmarks.filter(item => item.group === props.group);
+    }
+    return state.bookmarks;
+  });

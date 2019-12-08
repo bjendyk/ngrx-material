@@ -10,6 +10,5 @@ mat-action-row button mat-icon {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  transition: opacity .3s ease-in-out;
-  opacity: 0;
+  z-index: 1024;
 }

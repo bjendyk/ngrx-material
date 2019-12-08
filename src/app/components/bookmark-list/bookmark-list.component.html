@@ -3,7 +3,7 @@
   <mat-tab-group (selectedTabChange)="onTabChange($event)" color="accent">
     <mat-tab *ngFor="let group of groups" [label]="group">
       <mat-accordion>
-        <app-bookmark-details *ngFor="let bookmark of bookmarks"
+        <app-bookmark-details *ngFor="let bookmark of bookmarks$ | async"
                               [bookmark]="bookmark"
                               (delete)="onDelete($event)">
         </app-bookmark-details>

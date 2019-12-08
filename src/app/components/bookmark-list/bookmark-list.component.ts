@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 
-import { Bookmark } from '../../model/bookmark';
+import { Bookmark } from '../../model/bookmark.entity';
 import { BookmarkService } from '../../services/bookmark.service';
 import { Constants } from '../../constants/constants';
 import { Group } from '../../model/group.enum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bookmark-list',
@@ -12,7 +13,7 @@ import { Group } from '../../model/group.enum';
   styleUrls: ['./bookmark-list.component.css'],
 })
 export class BookmarkListComponent implements OnInit {
-  bookmarks: Array<Bookmark>;
+  bookmarks$: Observable<Array<Bookmark>>;
   groups: string[];
   currentGroup: string;
 
@@ -20,18 +21,21 @@ export class BookmarkListComponent implements OnInit {
 
   ngOnInit() {
     this.currentGroup = Group.Work;
-    this.bookmarks = this.bookmarkService.getBookmarks(this.currentGroup);
-    this.groups = this.bookmarkService.getGroupNames();
+    this.groups = BookmarkService.getGroupNames();
+    this.getBookmarks();
   }
 
   onTabChange(event) {
     this.currentGroup = event.tab.textLabel;
-    this.bookmarks = this.bookmarkService.getBookmarks(this.currentGroup);
+    this.getBookmarks();
   }
 
   onDelete(bookmark: Bookmark) {
     this.bookmarkService.deleteBookmark(bookmark.name);
-    this.bookmarks = this.bookmarkService.getBookmarks(this.currentGroup);
     this.snackBar.open('Bookmark deleted.', 'OK', { duration: Constants.SNACKBAR_TIMEOUT });
+  }
+
+  getBookmarks() {
+    this.bookmarks$ = this.bookmarkService.getBookmarks(this.currentGroup);
   }
 }
