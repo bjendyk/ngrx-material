@@ -1,0 +1,16 @@
+<div class="bookmark-list">
+  <h3>Browse bookmarks by group</h3>
+  <mat-tab-group (selectedTabChange)="onTabChange($event)" color="accent">
+    <mat-tab *ngFor="let group of groups" [label]="group">
+      <mat-accordion>
+        <app-bookmark-details *ngFor="let bookmark of bookmarks"
+                              [bookmark]="bookmark"
+                              (delete)="onDelete($event)">
+        </app-bookmark-details>
+      </mat-accordion>
+    </mat-tab>
+  </mat-tab-group>
+  <button class="btn-fab" mat-fab color="primary" aria-label="Add bookmark" [routerLink]="['/add-bookmark']">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,36 @@
+<div class="add-bookmark">
+  <h3>Add new bookmark</h3>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name" #inputName="ngModel" required/>
+    <mat-error *ngIf="inputName.invalid && (inputName.dirty || inputName.touched)">Name is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>URL</mat-label>
+    <input matInput [(ngModel)]="url" #inputUrl="ngModel" required/>
+    <mat-error *ngIf="inputUrl.invalid && (inputUrl.dirty || inputUrl.touched)">URL is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Group</mat-label>
+    <mat-select [(ngModel)]="selectedGroup" #selectGroup="ngModel" required>
+      <mat-option *ngFor="let group of groups" [value]="group">
+        {{ group }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="selectGroup.invalid && (selectGroup.dirty || selectGroup.touched)">Group is required</mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary"
+            [disabled]="!isFormValid()"
+            (click)="onCreate()">
+      Create
+    </button>
+    <button mat-button
+            [disabled]="!isFormValid()"
+            (click)="onCreateAndStay()">
+      Create and stay
+    </button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
+</div>

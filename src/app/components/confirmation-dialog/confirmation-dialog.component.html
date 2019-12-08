@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete bookmark</h2>
+<div mat-dialog-content>
+  Are you sure you want to delete <b>{{ data.bookmarkName }}</b> bookmark?
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onClose(true)" color="primary">Yes</button>
+  <button mat-button (click)="onClose(false)">No</button>
+</div>

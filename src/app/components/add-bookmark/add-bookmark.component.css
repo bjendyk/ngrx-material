@@ -1,0 +1,11 @@
+.add-bookmark {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

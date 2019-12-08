@@ -1,0 +1,15 @@
+.bookmark-list {
+  padding: 16px;
+}
+
+mat-action-row button mat-icon {
+  margin-right: 4px;
+}
+
+.btn-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  transition: opacity .3s ease-in-out;
+  opacity: 0;
+}

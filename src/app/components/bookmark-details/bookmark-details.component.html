@@ -1,0 +1,23 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ bookmark.name }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div class="bookmark-details">
+    <mat-form-field>
+      <input readonly matInput placeholder="Name" [value]="bookmark.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input readonly matInput placeholder="URL" [value]="bookmark.url">
+    </mat-form-field>
+    <a mat-stroked-button target="_blank" [href]="bookmark.url" color="primary">Open</a>
+  </div>
+
+  <mat-action-row>
+    <button mat-button color="primary" (click)="onDelete(bookmark)">
+      <mat-icon>delete</mat-icon><span>Delete</span>
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>
