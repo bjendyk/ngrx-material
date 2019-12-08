@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 
 import { RoutingModule } from './routing.module';
-import { LibraryImportsModule } from './library-imports';
+import { LibraryImportsModule } from './library-imports.module';
 
 import { AddBookmarkComponent } from './components/add-bookmark/add-bookmark.component';
 import { AppComponent } from './app.component';
