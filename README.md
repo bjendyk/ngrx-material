@@ -44,6 +44,10 @@ The groups are contained in a fixed `enum` but can be reworked to a collection m
 
 ![bookmarks list](./docs/remove-bookmark.png)
 
+## Installing dependencies
+
+This project uses `npm` for managing dependencies. Run `npm install` to install all required packages.
+
 ## Running the app
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
