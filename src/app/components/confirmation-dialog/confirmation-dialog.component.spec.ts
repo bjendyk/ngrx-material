@@ -1,25 +1,38 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 
+const dialogStub = jasmine.createSpyObj('MatDialogRef', ['close']);
+
 describe('ConfirmationDialogComponent', () => {
-  let component: ConfirmationDialogComponent;
-  let fixture: ComponentFixture<ConfirmationDialogComponent>;
+  let component;
+  let fixture;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationDialogComponent ]
+      imports: [ MatDialogModule ],
+      declarations: [ ConfirmationDialogComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: dialogStub },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     })
-    .compileComponents();
+    .compileComponents().then(() => {
+      fixture = TestBed.createComponent(ConfirmationDialogComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmationDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should be created', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should close the dialog with true/false result', () => {
+    component.onClose(true);
+    expect(dialogStub.close).toHaveBeenCalledWith(true);
+    component.onClose(false);
+    expect(dialogStub.close).toHaveBeenCalledWith(false);
   });
 });
