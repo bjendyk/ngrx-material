@@ -11,7 +11,11 @@ export class BookmarkService {
 
   constructor(private store: Store<{ bookmarks: Array<Bookmark> }>) { }
 
-  static getGroupNames(): string[] {
+  getBookmarks(group: string) {
+    return this.store.pipe(select(selectBookmarks, { group }));
+  }
+
+  getGroupNames(): string[] {
     const groupNames = [];
     for (const key in Group) {
       if (Group.hasOwnProperty(key)) {
@@ -19,10 +23,6 @@ export class BookmarkService {
       }
     }
     return groupNames;
-  }
-
-  getBookmarks(group: string) {
-    return this.store.pipe(select(selectBookmarks, { group }));
   }
 
   deleteBookmark(name: string) {

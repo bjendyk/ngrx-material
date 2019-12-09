@@ -21,7 +21,7 @@ export class BookmarkListComponent implements OnInit {
 
   ngOnInit() {
     this.currentGroup = Group.Work;
-    this.groups = BookmarkService.getGroupNames();
+    this.groups = this.bookmarkService.getGroupNames();
     this.getBookmarks();
   }
 
