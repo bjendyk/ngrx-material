@@ -1,4 +1,4 @@
-import { createReducer, createSelector, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { Bookmark } from '../model/bookmark.entity';
 import { BookmarkActions } from './actions';
@@ -69,14 +69,3 @@ const reducer = createReducer(initialState,
 export function bookmarkReducer(state, action) {
   return reducer(state, action);
 }
-
-export const selectAllBookmarks = (state: State) => state.bookmarks;
-
-export const selectBookmarks = createSelector(
-  selectAllBookmarks,
-  (state: any, props) => {
-    if (props.group) {
-      return state.bookmarks.filter(item => item.group === props.group);
-    }
-    return state.bookmarks;
-  });

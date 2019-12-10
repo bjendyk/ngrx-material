@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Bookmark } from '../model/bookmark.entity';
 import { Group } from '../model/group.enum';
 import { BookmarkActions } from '../store/actions';
-import { selectBookmarks } from '../store/reducers';
+import { selectBookmarks } from '../store/selectors';
 
 @Injectable()
 export class BookmarkService {
