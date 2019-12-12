@@ -1,12 +1,11 @@
 import { async, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatSnackBar } from '@angular/material';
-import { MatInputModule, MatSelectModule } from '@angular/material';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { AddBookmarkComponent } from './add-bookmark.component';
 import { BookmarkService } from '../../services/bookmark.service';
+import { LibraryImportsModule } from '../../library-imports.module';
 
 const bookmarkServiceStub = jasmine.createSpyObj('BookmarkService', ['getGroupNames', 'createBookmark']);
 bookmarkServiceStub.getGroupNames.and.returnValue(['group_1', 'group_2']);
@@ -21,7 +20,7 @@ describe('AddBookmarkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, NoopAnimationsModule, MatInputModule, MatFormFieldModule, MatSelectModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule ],
       declarations: [ AddBookmarkComponent ],
       providers: [
         { provide: BookmarkService, useValue: bookmarkServiceStub },
