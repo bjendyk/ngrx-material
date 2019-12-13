@@ -7,7 +7,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 @Component({
   selector: 'app-bookmark-details',
   templateUrl: './bookmark-details.component.html',
-  styleUrls: ['./bookmark-details.component.css'],
+  styleUrls: ['./bookmark-details.component.scss'],
 })
 export class BookmarkDetailsComponent {
   @Input() bookmark: Bookmark;

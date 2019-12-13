@@ -4,6 +4,10 @@
 }
 
 a[mat-stroked-button], button {
-  width: 160px;
+  width: 144px;
   text-transform: uppercase;
+}
+
+mat-action-row button mat-icon {
+  margin-right: 4px;
 }

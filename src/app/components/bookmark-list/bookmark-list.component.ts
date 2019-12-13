@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-bookmark-list',
   templateUrl: './bookmark-list.component.html',
-  styleUrls: ['./bookmark-list.component.css'],
+  styleUrls: ['./bookmark-list.component.scss'],
 })
 export class BookmarkListComponent implements OnInit {
   bookmarks$: Observable<Array<Bookmark>>;

@@ -8,7 +8,7 @@ import { Constants } from '../../constants/constants';
 @Component({
   selector: 'app-add-bookmark',
   templateUrl: './add-bookmark.component.html',
-  styleUrls: ['./add-bookmark.component.css']
+  styleUrls: ['./add-bookmark.component.scss']
 })
 export class AddBookmarkComponent implements OnInit {
   name: string;
