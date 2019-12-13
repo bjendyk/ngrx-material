@@ -1,6 +1,4 @@
 import { async, TestBed } from '@angular/core/testing';
-import { Directive, HostListener, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
@@ -11,19 +9,6 @@ import { Bookmark } from '../../model/bookmark.entity';
 import { Group } from '../../model/group.enum';
 import { BookmarkService } from '../../services/bookmark.service';
 import { BookmarkDetailsComponent } from '../bookmark-details/bookmark-details.component';
-
-@Directive({
-  selector: '[routerLink]' // tslint:disable-line
-})
-export class RouterLinkDirective {
-  @Input('routerLink') linkParams: any;
-  navigatedTo: any = null;
-
-  @HostListener('click')
-  onClick() {
-    this.navigatedTo = this.linkParams;
-  }
-}
 
 const bookmarks: Bookmark[] = [
   {
@@ -56,7 +41,6 @@ describe('BookmarkListComponent', () => {
       imports: [ NoopAnimationsModule, LibraryImportsModule, RouterTestingModule ],
       declarations: [ BookmarkDetailsComponent, BookmarkListComponent ],
       providers: [
-        { provide: RouterLink, useClass: RouterLinkDirective },
         { provide: BookmarkService, useValue: bookmarkServiceStub }
       ]
     })
