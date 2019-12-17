@@ -14,7 +14,9 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { BookmarkService } from './services/bookmark.service';
-import { bookmarkReducer } from './store/reducers';
+import { GroupService } from './services/group.service';
+import { bookmarkReducer, groupReducer } from './store/reducers';
+import { NotFoundComponent } from './components/404/not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,17 @@ import { bookmarkReducer } from './store/reducers';
     BookmarkDetailsComponent,
     ConfirmationDialogComponent,
     NavbarComponent,
+    NotFoundComponent
   ],
+  providers: [BookmarkService, GroupService],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LibraryImportsModule,
     RoutingModule,
     StoreModule.forRoot({
-      bookmarks: bookmarkReducer
+      bookmarks: bookmarkReducer,
+      groups: groupReducer
     }, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -39,7 +44,6 @@ import { bookmarkReducer } from './store/reducers';
       }
     })
   ],
-  providers: [BookmarkService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]
 })

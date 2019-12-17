@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { Bookmark } from '../model/bookmark.entity';
-import { BookmarkActions } from './actions';
-import { Group } from '../model/group.enum';
+import { BookmarkActions, GroupActions } from './actions';
 
 export interface State {
-  bookmarks: Array<Bookmark>;
+  bookmarks: Bookmark[];
+  groups: string[];
 }
 
 export const initialState: State = {
@@ -13,59 +13,79 @@ export const initialState: State = {
     {
       name: 'Suzuki SV650',
       url: 'https://en.wikipedia.org/wiki/Suzuki_SV650',
-      group: Group.Leisure
+      group: 'Leisure'
     },
     {
       name: 'Wakacje.pl',
       url: 'https://wakacje.pl',
-      group: Group.Leisure
+      group: 'Leisure'
     },
     {
       name: 'Gmail',
       url: 'https://gmail.com',
-      group: Group.Personal
+      group: 'Personal'
     },
     {
       name: 'Proton Mail',
       url: 'https://protonmail.ch',
-      group: Group.Personal
+      group: 'Personal'
     },
     {
       name: 'Coders Lab',
       url: 'https://coderslab.pl',
-      group: Group.Work
+      group: 'Work'
     },
     {
       name: 'Onwelo',
       url: 'https://onwelo.com',
-      group: Group.Work
+      group: 'Work'
     },
     {
       name: 'Angular',
       url: 'https://angular.io',
-      group: Group.Work
+      group: 'Work'
     },
     {
       name: 'Angular Material',
       url: 'https://material.angular.io',
-      group: Group.Work
+      group: 'Work'
     }
+  ],
+  groups: [
+    'Work', 'Leisure', 'Personal'
   ]
 };
 
-const reducer = createReducer(initialState,
-  on(BookmarkActions.addBookmark, (state, { bookmark }) => ({
-      ...state,
-      bookmarks: [...state.bookmarks, bookmark]
-    })
-  ),
-  on(BookmarkActions.deleteBookmark, (state, { name }) => ({
-      ...state,
-      bookmarks: state.bookmarks.filter(item => item.name !== name)
-    })
-  ),
-);
+export function bookmarkReducer(appState, action) {
+  const reducer = createReducer(initialState,
+    on(BookmarkActions.addBookmark, (state, { bookmark }) => ({
+        ...state,
+        bookmarks: [...state.bookmarks, bookmark]
+      })
+    ),
+    on(BookmarkActions.deleteBookmark, (state, { name }) => ({
+        ...state,
+        bookmarks: state.bookmarks.filter(item => item.name !== name)
+      })
+    )
+  );
+  return reducer(appState, action);
+}
 
-export function bookmarkReducer(state, action) {
-  return reducer(state, action);
+export function groupReducer(appState, action) {
+  const reducer = createReducer(initialState,
+    on(GroupActions.addGroup, (state, { groupName }) => ({
+        ...state,
+        groups: [...state.groups, groupName]
+      })
+    ),
+    on(GroupActions.deleteGroup, (state, { groupName }) => {
+        return {
+          ...state,
+          groups: state.groups.filter(item => item !== groupName)
+        };
+      }
+    )
+  );
+  return reducer(appState, action);
 }

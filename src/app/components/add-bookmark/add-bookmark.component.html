@@ -16,7 +16,7 @@
   <mat-form-field>
     <mat-label>Group</mat-label>
     <mat-select [(ngModel)]="selectedGroup" #selectGroup="ngModel" required>
-      <mat-option *ngFor="let group of groups" [value]="group">
+      <mat-option *ngFor="let group of groups$ | async" [value]="group">
         {{ group }}
       </mat-option>
     </mat-select>

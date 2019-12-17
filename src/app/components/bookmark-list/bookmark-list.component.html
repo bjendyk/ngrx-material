@@ -1,7 +1,7 @@
 <div class="bookmark-list">
   <h3>Browse bookmarks by group</h3>
   <mat-tab-group (selectedTabChange)="onTabChange($event)" color="accent">
-    <mat-tab *ngFor="let group of groups" [label]="group">
+    <mat-tab *ngFor="let group of groups$ | async" [label]="group">
       <mat-accordion>
         <app-bookmark-details *ngFor="let bookmark of bookmarks$ | async"
                               [bookmark]="bookmark"

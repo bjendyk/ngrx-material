@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs';
 
 import { Bookmark } from '../../model/bookmark.entity';
 import { BookmarkService } from '../../services/bookmark.service';
 import { Constants } from '../../constants/constants';
-import { Group } from '../../model/group.enum';
-import { Observable } from 'rxjs';
+import { GroupService } from '../../services/group.service';
 
 @Component({
   selector: 'app-bookmark-list',
@@ -13,15 +13,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./bookmark-list.component.scss'],
 })
 export class BookmarkListComponent implements OnInit {
-  bookmarks$: Observable<Array<Bookmark>>;
-  groups: string[];
+  bookmarks$: Observable<Bookmark[]>;
+  groups$: Observable<string[]>;
   currentGroup: string;
 
-  constructor(private bookmarkService: BookmarkService, private snackBar: MatSnackBar) { }
+  constructor(private bookmarkService: BookmarkService,
+              private groupService: GroupService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.currentGroup = Group.Work;
-    this.groups = this.bookmarkService.getGroupNames();
+    this.groupService.getFirstGroup().subscribe((group) => {
+      this.currentGroup = group;
+    });
+    this.groups$ = this.groupService.getGroups();
     this.getBookmarks();
   }
 

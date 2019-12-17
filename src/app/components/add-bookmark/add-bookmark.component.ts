@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material';
 
 import { BookmarkService } from '../../services/bookmark.service';
 import { Constants } from '../../constants/constants';
+import { GroupService } from '../../services/group.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-bookmark',
@@ -14,14 +16,15 @@ export class AddBookmarkComponent implements OnInit {
   name: string;
   url: string;
   selectedGroup: string;
-  groups: string[];
+  groups$: Observable<string[]>;
 
   constructor(private bookmarkService: BookmarkService,
+              private groupService: GroupService,
               private router: Router,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.groups = this.bookmarkService.getGroupNames();
+    this.groups$ = this.groupService.getGroups();
   }
 
   onCreate() {
