@@ -6,31 +6,34 @@ import { of } from 'rxjs';
 import { BookmarkListComponent } from './bookmark-list.component';
 import { LibraryImportsModule } from '../../library-imports.module';
 import { Bookmark } from '../../model/bookmark.entity';
-import { Group } from '../../model/group.enum';
 import { BookmarkService } from '../../services/bookmark.service';
 import { BookmarkDetailsComponent } from '../bookmark-details/bookmark-details.component';
+import { GroupService } from '../../services/group.service';
 
 const bookmarks: Bookmark[] = [
   {
     name: 'bookmark 1',
     url: 'url 1',
-    group: Group.Personal
+    group: 'Personal'
   },
   {
     name: 'bookmark 2',
     url: 'url 2',
-    group: Group.Leisure
+    group: 'Leisure'
   },
   {
     name: 'bookmark 3',
     url: 'url 3',
-    group: Group.Work
+    group: 'Work'
   }
 ];
 
 const bookmarkServiceStub = jasmine.createSpyObj('BookmarkService', ['getBookmarks', 'deleteBookmark', 'getGroupNames']);
 bookmarkServiceStub.getBookmarks.and.returnValue(of(bookmarks));
-bookmarkServiceStub.getGroupNames.and.returnValue([Group.Work, Group.Leisure, Group.Personal]);
+
+const groupServiceStub = jasmine.createSpyObj('GroupService', ['getGroups', 'getFirstGroup']);
+groupServiceStub.getGroups.and.returnValue(of(['Personal', 'Work', 'Leisure']));
+groupServiceStub.getFirstGroup.and.returnValue(of('Personal'));
 
 describe('BookmarkListComponent', () => {
   let component;
@@ -41,7 +44,8 @@ describe('BookmarkListComponent', () => {
       imports: [ NoopAnimationsModule, LibraryImportsModule, RouterTestingModule ],
       declarations: [ BookmarkDetailsComponent, BookmarkListComponent ],
       providers: [
-        { provide: BookmarkService, useValue: bookmarkServiceStub }
+        { provide: BookmarkService, useValue: bookmarkServiceStub },
+        { provide: GroupService, useValue: groupServiceStub }
       ]
     })
     .compileComponents().then(() => {
@@ -58,10 +62,6 @@ describe('BookmarkListComponent', () => {
   });
 
   it('ngOnInit() should initialize the component data', () => {
-    expect(component.currentGroup).toEqual(Group.Work);
-    expect(typeof component.groups).toBe('object');
-    expect(component.groups.length).toEqual(3);
-    expect(bookmarkServiceStub.getBookmarks).toHaveBeenCalled();
 
     component.bookmarks$.subscribe((result) => {
       expect(result.length).toEqual(3);
@@ -69,6 +69,15 @@ describe('BookmarkListComponent', () => {
       expect(result[1].name).toEqual('bookmark 2');
       expect(result[2].name).toEqual('bookmark 3');
     });
+
+    component.groups$.subscribe((result) => {
+      expect(result.length).toEqual(3);
+      expect(result[0]).toEqual('Personal');
+      expect(result[1]).toEqual('Work');
+      expect(result[2]).toEqual('Leisure');
+    });
+
+    expect(component.currentGroup).toEqual('Personal');
   });
 
   it('getBookmarks() should set the bookmarks$ observable', () => {

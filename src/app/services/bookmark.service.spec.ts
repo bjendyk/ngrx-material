@@ -1,6 +1,5 @@
 import { BookmarkService } from './bookmark.service';
 import { Bookmark } from '../model/bookmark.entity';
-import { Group } from '../model/group.enum';
 
 const storeStub = jasmine.createSpyObj('Store', ['pipe', 'dispatch']);
 const selectSpy = jasmine.createSpy('select');
@@ -14,7 +13,7 @@ describe('BookmarkService', () => {
   });
 
   it('createBookmark() should dispatch the store message', () => {
-    const bookmark: Bookmark = { name: 'bookmark', url: 'url', group: Group.Personal } as Bookmark;
+    const bookmark: Bookmark = { name: 'bookmark', url: 'url', group: 'Personal' } as Bookmark;
     svc.createBookmark(bookmark.name, bookmark.url, bookmark.group);
     expect(storeStub.dispatch).toHaveBeenCalledWith({
       bookmark, type: '[Bookmark] add bookmark'
@@ -33,11 +32,5 @@ describe('BookmarkService', () => {
     svc.getBookmarks('group');
     expect(storeStub.pipe).toHaveBeenCalled();
     expect(selectSpy).toHaveBeenCalled();
-  });
-
-  it('getGroupNames() should return an array', () => {
-    const result = svc.getGroupNames();
-    expect(typeof result).toBe('object');
-    expect(result.length).toBe(3);
   });
 });

@@ -2,13 +2,17 @@ import { async, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { of } from 'rxjs';
 
 import { AddBookmarkComponent } from './add-bookmark.component';
 import { BookmarkService } from '../../services/bookmark.service';
 import { LibraryImportsModule } from '../../library-imports.module';
+import { GroupService } from '../../services/group.service';
 
 const bookmarkServiceStub = jasmine.createSpyObj('BookmarkService', ['getGroupNames', 'createBookmark']);
-bookmarkServiceStub.getGroupNames.and.returnValue(['group_1', 'group_2']);
+
+const groupServiceStub = jasmine.createSpyObj('GroupService', ['getGroups', 'getFirstGroup']);
+groupServiceStub.getGroups.and.returnValue(of(['Personal', 'Work', 'Leisure']));
 
 const routerStub = jasmine.createSpyObj('Router', ['navigateByUrl']);
 const snackBarStub = jasmine.createSpyObj('MatSnackBar', ['open']);
@@ -24,6 +28,7 @@ describe('AddBookmarkComponent', () => {
       declarations: [ AddBookmarkComponent ],
       providers: [
         { provide: BookmarkService, useValue: bookmarkServiceStub },
+        { provide: GroupService, useValue: groupServiceStub },
         { provide: Router, useValue: routerStub },
         { provide: MatSnackBar, useValue: snackBarStub },
       ]
@@ -42,11 +47,13 @@ describe('AddBookmarkComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit() should set the `groups` member', () => {
-    expect(bookmarkServiceStub.getGroupNames).toHaveBeenCalled();
-    expect(component.groups.length).toEqual(2);
-    expect(component.groups[0]).toEqual('group_1');
-    expect(component.groups[1]).toEqual('group_2');
+  it('ngOnInit() should set the `groups$` observable', () => {
+    component.groups$.subscribe((result) => {
+      expect(result.length).toEqual(3);
+      expect(result[0]).toEqual('Personal');
+      expect(result[1]).toEqual('Work');
+      expect(result[2]).toEqual('Leisure');
+    });
   });
 
   it('onCancel() should navigate to `/bookmarks` path', () => {

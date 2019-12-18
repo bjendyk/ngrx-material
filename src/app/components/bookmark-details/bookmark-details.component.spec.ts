@@ -4,7 +4,6 @@ import { of } from 'rxjs';
 
 import { Bookmark } from '../../model/bookmark.entity';
 import { BookmarkDetailsComponent } from './bookmark-details.component';
-import { Group } from '../../model/group.enum';
 import { LibraryImportsModule } from '../../library-imports.module';
 
 describe('BookmarkDetailsComponent', () => {
@@ -15,7 +14,7 @@ describe('BookmarkDetailsComponent', () => {
   const bookmark: Bookmark = {
     name: 'bookmark',
     url: 'http://bookmark.com',
-    group: Group.Personal
+    group: 'Personal'
   } as Bookmark;
 
   beforeEach(async(() => {

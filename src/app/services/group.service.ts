@@ -21,7 +21,7 @@ export class GroupService {
     this.store.dispatch(GroupActions.addGroup({ groupName: name }));
   }
 
-  deleteBookmark(name: string) {
+  deleteGroup(name: string) {
     this.store.dispatch(GroupActions.deleteGroup( { groupName: name }));
   }
 
