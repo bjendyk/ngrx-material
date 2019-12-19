@@ -18,7 +18,8 @@ export class BookmarkDetailsComponent {
   onDelete(bookmark) {
     const dialogData = {
       data: {
-        bookmarkName: bookmark.name
+        entityName: bookmark.name,
+        entityType: 'bookmark'
       }
     };
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogData);

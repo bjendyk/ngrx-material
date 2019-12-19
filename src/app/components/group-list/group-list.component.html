@@ -1,0 +1,21 @@
+<div class="group-list">
+  <h3>Manage groups</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let group of groups$ | async; last as last">
+      <div class="flex-row">
+        <div class="flex-item flex-row flex-align-start">
+          <span>{{ group }}</span>
+        </div>
+        <div class="flex-item flex-row flex-align-end">
+          <button mat-icon-button color="primary" (click)="onDelete(group)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  <button class="btn-fab" mat-fab color="primary" aria-label="Add group" [routerLink]="['/add-group']">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

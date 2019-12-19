@@ -7,6 +7,9 @@ export const selectBookmarks = createSelector(
   selectAllBookmarks,
   (state: any, props) => {
     if (props.group) {
+      if (props.group === 'Unassigned') {
+        return state.bookmarks.filter(item => item.group === '');
+      }
       return state.bookmarks.filter(item => item.group === props.group);
     }
     return state.bookmarks;
@@ -14,7 +17,10 @@ export const selectBookmarks = createSelector(
 
 export const allGroups = (state: State) => state.groups;
 
-export const selectAllGroups = createSelector(allGroups, (state: any) => {
+export const selectAllGroups = createSelector(allGroups, (state: any, props) => {
+  if (props.includeUnassigned) {
+    return [...state.groups, 'Unassigned'];
+  }
   return state.groups;
 });
 

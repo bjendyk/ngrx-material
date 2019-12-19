@@ -3,14 +3,14 @@ import { select, Store } from '@ngrx/store';
 
 import { Bookmark } from '../model/bookmark.entity';
 import { selectAllGroups, selectFirstGroup } from '../store/selectors';
-import { GroupActions } from '../store/actions';
+import { BookmarkActions, GroupActions } from '../store/actions';
 
 @Injectable()
 export class GroupService {
   constructor(private store: Store<{ bookmarks: Bookmark[], groups: string[] }>) { }
 
-  getGroups() {
-    return this.store.pipe(select(selectAllGroups));
+  getGroups(includeUnassigned: boolean) {
+    return this.store.pipe(select(selectAllGroups, { includeUnassigned }));
   }
 
   getFirstGroup() {
@@ -22,6 +22,7 @@ export class GroupService {
   }
 
   deleteGroup(name: string) {
+    this.store.dispatch(BookmarkActions.clearBookmarkGroup({ groupName: name }));
     this.store.dispatch(GroupActions.deleteGroup( { groupName: name }));
   }
 

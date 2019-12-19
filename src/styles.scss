@@ -5,3 +5,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 button {
   text-transform: uppercase;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: baseline;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-item {
+  flex-grow: 1;
+}
+
+.flex-align-end {
+  justify-content: flex-end;
+}
+
+.flex-align-start {
+  justify-content: flex-start;
+}

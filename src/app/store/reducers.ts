@@ -67,6 +67,20 @@ export function bookmarkReducer(appState, action) {
         ...state,
         bookmarks: state.bookmarks.filter(item => item.name !== name)
       })
+    ),
+    on(BookmarkActions.clearBookmarkGroup, (state, { groupName }) => ({
+        ...state,
+        bookmarks: state.bookmarks.map((bookmark) => {
+          if (bookmark.group === groupName) {
+            return {
+              name: bookmark.name,
+              url: bookmark.url,
+              group: ''
+            };
+          }
+          return bookmark;
+        }),
+      })
     )
   );
   return reducer(appState, action);
@@ -79,12 +93,10 @@ export function groupReducer(appState, action) {
         groups: [...state.groups, groupName]
       })
     ),
-    on(GroupActions.deleteGroup, (state, { groupName }) => {
-        return {
+    on(GroupActions.deleteGroup, (state, { groupName }) => ({
           ...state,
           groups: state.groups.filter(item => item !== groupName)
-        };
-      }
+      })
     )
   );
   return reducer(appState, action);

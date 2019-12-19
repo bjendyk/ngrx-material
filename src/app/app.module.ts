@@ -17,6 +17,7 @@ import { BookmarkService } from './services/bookmark.service';
 import { GroupService } from './services/group.service';
 import { bookmarkReducer, groupReducer } from './store/reducers';
 import { NotFoundComponent } from './components/404/not-found.component';
+import { GroupListComponent } from './components/group-list/group-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NotFoundComponent } from './components/404/not-found.component';
     BookmarkListComponent,
     BookmarkDetailsComponent,
     ConfirmationDialogComponent,
+    GroupListComponent,
     NavbarComponent,
     NotFoundComponent
   ],

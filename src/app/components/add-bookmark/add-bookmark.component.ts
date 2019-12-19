@@ -24,7 +24,7 @@ export class AddBookmarkComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.groups$ = this.groupService.getGroups();
+    this.groups$ = this.groupService.getGroups(false);
   }
 
   onCreate() {

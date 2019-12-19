@@ -25,7 +25,7 @@ export class BookmarkListComponent implements OnInit {
     this.groupService.getFirstGroup().subscribe((group) => {
       this.currentGroup = group;
     });
-    this.groups$ = this.groupService.getGroups();
+    this.groups$ = this.groupService.getGroups(true);
     this.getBookmarks();
   }
 

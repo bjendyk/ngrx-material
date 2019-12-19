@@ -5,11 +5,13 @@ import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/
 import { AddBookmarkComponent } from './components/add-bookmark/add-bookmark.component';
 import { BookmarkListComponent } from './components/bookmark-list/bookmark-list.component';
 import { NotFoundComponent } from './components/404/not-found.component';
+import { GroupListComponent } from './components/group-list/group-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bookmarks', pathMatch: 'full' },
   { path: 'bookmarks', component: BookmarkListComponent },
   { path: 'add-bookmark', component: AddBookmarkComponent },
+  { path: 'groups', component: GroupListComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

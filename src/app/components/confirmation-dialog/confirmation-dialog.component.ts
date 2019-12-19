@@ -2,7 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 export interface DialogData {
-  bookmarkName: string;
+  entityName: string;
+  entityType: string;
 }
 
 @Component({
