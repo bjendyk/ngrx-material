@@ -1,0 +1,17 @@
+<div class="add-group flex-col">
+  <h3>Add new group</h3>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name" #inputName="ngModel" required/>
+    <mat-error *ngIf="inputName.invalid && (inputName.dirty || inputName.touched)">Name is required</mat-error>
+  </mat-form-field>
+
+  <div class="buttons flex-row">
+    <button mat-raised-button color="primary"
+            [disabled]="inputName.invalid"
+            (click)="onCreate()">
+      Create
+    </button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
+</div>

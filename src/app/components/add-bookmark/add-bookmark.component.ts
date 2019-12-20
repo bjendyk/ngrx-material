@@ -7,6 +7,8 @@ import { Constants } from '../../constants/constants';
 import { GroupService } from '../../services/group.service';
 import { Observable } from 'rxjs';
 
+const bookmarksUrl = '/bookmarks';
+
 @Component({
   selector: 'app-add-bookmark',
   templateUrl: './add-bookmark.component.html',
@@ -29,11 +31,11 @@ export class AddBookmarkComponent implements OnInit {
 
   onCreate() {
     this.bookmarkService.createBookmark(this.name, this.url, this.selectedGroup);
-    this.router.navigateByUrl('/bookmarks');
+    this.router.navigateByUrl(bookmarksUrl);
     this.snackBar.open('Bookmark created.', 'OK', { duration: Constants.SNACKBAR_TIMEOUT });
   }
 
   onCancel() {
-    this.router.navigateByUrl('/bookmarks');
+    this.router.navigateByUrl(bookmarksUrl);
   }
 }

@@ -1,4 +1,4 @@
-<div class="add-bookmark">
+<div class="add-bookmark flex-col">
   <h3>Add new bookmark</h3>
   <mat-form-field>
     <mat-label>Name</mat-label>
@@ -23,7 +23,7 @@
     <mat-error *ngIf="selectGroup.invalid && (selectGroup.dirty || selectGroup.touched)">Group is required</mat-error>
   </mat-form-field>
 
-  <div class="buttons">
+  <div class="buttons flex-row">
     <button mat-raised-button color="primary"
             [disabled]="inputName.invalid || inputUrl.invalid || selectGroup.invalid"
             (click)="onCreate()">
