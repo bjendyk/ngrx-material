@@ -19,6 +19,7 @@ import { NotFoundComponent } from './components/404/not-found.component';
 import { BookmarkService } from './services/bookmark.service';
 import { GroupService } from './services/group.service';
 import { bookmarkReducer, groupReducer } from './store/reducers';
+import { ExistingNameDirective } from './directives/validators/existing-name.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { bookmarkReducer, groupReducer } from './store/reducers';
     ConfirmationDialogComponent,
     GroupListComponent,
     NavbarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ExistingNameDirective
   ],
   providers: [BookmarkService, GroupService],
   imports: [

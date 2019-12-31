@@ -30,3 +30,10 @@ export const selectFirstGroup = createSelector(allGroups, (state: any) => {
   }
   return null;
 });
+
+export const selectGroupByName = createSelector(allGroups, (state: any, props) => {
+  if (props.name) {
+    return [...state.groups, 'Unassigned'].filter(item => item.toLowerCase() === props.name.toLowerCase());
+  }
+  return null;
+});

@@ -2,8 +2,11 @@
   <h3>Add new group</h3>
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="name" #inputName="ngModel" required/>
-    <mat-error *ngIf="inputName.invalid && (inputName.dirty || inputName.touched)">Name is required</mat-error>
+    <input matInput [(ngModel)]="name" #inputName="ngModel" required appExistingName />
+    <mat-error *ngIf="inputName.invalid && (inputName.dirty || inputName.touched)">
+      <div *ngIf="inputName.errors.required">Name is required</div>
+      <div *ngIf="inputName.errors.exists">This group already exists. Type in a different name</div>
+    </mat-error>
   </mat-form-field>
 
   <div class="buttons flex-row">
