@@ -8,7 +8,7 @@ The app is a simple showcase of Angular 8 + Angular Material + NgRx.
 
 The app uses NgRx store to manage the in-memory collection of browser bookmarks.
 The initial data is hardcoded and the collection is not persisted anywhere.
-The groups are contained in a fixed `enum` but can be reworked to a collection manageable by the app store.
+The groups are managed by the app and can be created or removed.
 
 ### Modules
 
@@ -29,6 +29,8 @@ The groups are contained in a fixed `enum` but can be reworked to a collection m
 
 - `bookmarksService` - a facade that interacts with NgRx store: dispatches `create`/`delete` events and retrieves
 (selects) the bookmarks.
+
+- `groupService` - a facade that interacts with NgRx store in terms of groups management.
 
 ## Features
 
