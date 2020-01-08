@@ -19,10 +19,10 @@ export function existingNameValidator(groupService: GroupService): AsyncValidato
 }
 
 @Directive({
-  selector: '[appExistingName]',
-  providers: [{provide: NG_ASYNC_VALIDATORS, useExisting: ExistingNameDirective, multi: true}]
+  selector: '[appGroupNameValidator]',
+  providers: [{provide: NG_ASYNC_VALIDATORS, useExisting: GroupNameValidator, multi: true}]
 })
-export class ExistingNameDirective implements AsyncValidator {
+export class GroupNameValidator implements AsyncValidator {
   constructor(private groupService: GroupService) {  }
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
