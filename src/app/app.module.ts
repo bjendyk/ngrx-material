@@ -1,7 +1,10 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { RoutingModule } from './routing.module';
 import { LibraryImportsModule } from './library-imports.module';
@@ -23,6 +26,10 @@ import { GroupNameValidator } from './directives/validators/group-name-validator
 
 import { bookmarkReducer, groupReducer } from './store/reducers';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AddBookmarkComponent,
@@ -40,6 +47,7 @@ import { bookmarkReducer, groupReducer } from './store/reducers';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     LibraryImportsModule,
     RoutingModule,
     StoreModule.forRoot({
@@ -49,6 +57,13 @@ import { bookmarkReducer, groupReducer } from './store/reducers';
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
+      }
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     })
   ],

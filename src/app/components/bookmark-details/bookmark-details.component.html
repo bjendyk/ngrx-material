@@ -7,10 +7,12 @@
 
   <div class="bookmark-details">
     <mat-form-field>
-      <input readonly matInput placeholder="Name" [value]="bookmark.name">
+      <mat-label>{{ 'BOOKMARK_DETAILS.NAME' | translate }}</mat-label>
+      <input readonly matInput [value]="bookmark.name">
     </mat-form-field>
     <mat-form-field>
-      <input readonly matInput placeholder="URL" [value]="bookmark.url">
+      <mat-label>{{ 'BOOKMARK_DETAILS.URL' | translate }}</mat-label>
+      <input readonly matInput [value]="bookmark.url">
     </mat-form-field>
   </div>
 
@@ -19,11 +21,11 @@
        target="_blank"
        [href]="bookmark.url"
        color="primary"
-       matTooltip="Open in new tab">
-      Navigate
+       matTooltip="{{ 'BOOKMARK_DETAILS.OPEN_IN_NEW_TAB' | translate }}">
+      {{ 'BOOKMARK_DETAILS.NAVIGATE' | translate }}
     </a>
     <button mat-button color="primary" (click)="onDelete(bookmark)">
-      <mat-icon>delete</mat-icon><span>Delete</span>
+      <mat-icon>delete</mat-icon><span>{{ 'COMMON.DELETE' | translate }}</span>
     </button>
   </mat-action-row>
 </mat-expansion-panel>

@@ -1,0 +1,69 @@
+{
+  "ADD_GROUP": {
+    "FORM": {
+      "NAME": "Name",
+      "VALIDATORS": {
+        "NAME_EXISTS": "This group already exists. Type in a different name",
+        "NAME_REQUIRED": "Name is required"
+      }
+    },
+    "GROUP_CREATED": "Group created.",
+    "TITLE": "Add new group"
+  },
+  "ADD_NEW_BOOKMARK": {
+    "BOOKMARK_CREATED": "Bookmark created.",
+    "FORM": {
+      "GROUP": "Group",
+      "NAME": "Name",
+      "URL": "URL",
+      "VALIDATORS": {
+        "GROUP_REQUIRED": "Group is required",
+        "NAME_REQUIRED": "Name is required",
+        "URL_INVALID": "This is not a valid URL",
+        "URL_REQUIRED": "URL is required"
+      }
+    },
+    "TITLE": "Add new bookmark"
+  },
+  "BOOKMARK_DETAILS": {
+    "NAME": "Name",
+    "NAVIGATE": "Navigate",
+    "OPEN_IN_NEW_TAB": "Open in new tab",
+    "URL": "URL"
+  },
+  "BOOKMARK_LIST": {
+    "BOOKMARK_DELETED": "Bookmark deleted.",
+    "TITLE": "Browse bookmarks by group"
+  },
+  "COMMON": {
+    "CANCEL": "Cancel",
+    "CREATE": "Create",
+    "DELETE": "Delete",
+    "ENTITY_TYPES": {
+      "BOOKMARK": "zakładkę",
+      "GROUP": "grupę"
+    },
+    "NO": "No",
+    "UNASSIGNED": "Unassigned",
+    "YES": "Yes"
+  },
+  "CONFIRMATION_DIALOG": {
+    "CONTENT": "Are you sure you want to delete <b>{{ entityName }}</b> {{ entityType }}?",
+    "TITLE": "Delete {{entityType}}"
+  },
+  "GROUP_LIST": {
+    "GROUP_DELETED": "Group deleted.",
+    "TITLE": "Manage groups"
+  },
+  "NAVBAR": {
+    "ADD_BOOKMARK": "Add bookmark",
+    "APP_TITLE": "My Bookmarks",
+    "HOME": "Home",
+    "MANAGE_GROUPS": "Manage groups",
+    "MENU": "Menu"
+  },
+  "NOT_FOUND": {
+    "MESSAGE": "Looks like the page you're looking for <b>doesn't exist</b>.",
+    "TITLE": "Oooops!"
+  }
+}

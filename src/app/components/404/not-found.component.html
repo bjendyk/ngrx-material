@@ -1,5 +1,5 @@
 <div class="container">
   <mat-icon color="primary">error_outline</mat-icon>
-  <h1>Ooops!</h1>
-  <p>Looks like the page you're looking for <b>doesn't exist</b>.</p>
+  <h1>{{ 'NOT_FOUND.TITLE' | translate }}</h1>
+  <p [innerHTML]="'NOT_FOUND.MESSAGE' | translate"></p>
 </div>

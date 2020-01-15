@@ -1,11 +1,15 @@
 <div class="add-group flex-col">
-  <h3>Add new group</h3>
+  <h3>{{ 'ADD_GROUP.TITLE' | translate }}</h3>
   <mat-form-field>
-    <mat-label>Name</mat-label>
+    <mat-label>{{ 'ADD_GROUP.FORM.NAME' | translate }}</mat-label>
     <input matInput [(ngModel)]="name" #inputName="ngModel" required appGroupNameValidator />
     <mat-error *ngIf="inputName.invalid && (inputName.dirty || inputName.touched)">
-      <div *ngIf="inputName.errors.required">Name is required</div>
-      <div *ngIf="inputName.errors.exists">This group already exists. Type in a different name</div>
+      <div *ngIf="inputName.errors.required">
+        {{ 'ADD_GROUP.FORM.VALIDATORS.NAME_REQUIRED' | translate }}
+      </div>
+      <div *ngIf="inputName.errors.exists">
+        {{ 'ADD_GROUP.FORM.VALIDATORS.NAME_EXISTS' | translate }}
+      </div>
     </mat-error>
   </mat-form-field>
 
@@ -13,8 +17,10 @@
     <button mat-raised-button color="primary"
             [disabled]="inputName.invalid"
             (click)="onCreate()">
-      Create
+      {{ 'COMMON.CREATE' | translate }}
     </button>
-    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onCancel()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
   </div>
 </div>

@@ -1,0 +1,70 @@
+{
+  "ADD_GROUP": {
+    "FORM": {
+      "NAME": "Nazwa",
+      "VALIDATORS": {
+        "NAME_EXISTS": "Taka grupa już istnieje. Podaj inną nazwę",
+        "NAME_REQUIRED": "Nazwa jest wymagana"
+      }
+    },
+    "GROUP_CREATED": "Grupa została utworzona.",
+    "TITLE": "Nowa grupa"
+  },
+  "ADD_NEW_BOOKMARK": {
+    "BOOKMARK_CREATED": "Zakładka została utworzona.",
+    "FORM": {
+      "GROUP": "Grupa",
+      "NAME": "Nazwa",
+      "URL": "Adres URL",
+      "VALIDATORS": {
+        "GROUP_REQUIRED": "Grupa jest wymagana",
+        "NAME_REQUIRED": "Nazwa jest wymagana",
+        "URL_INVALID": "Nieprawidłowy adres URL",
+        "URL_REQUIRED": "Adres URL jest wymagany"
+      }
+    },
+    "TITLE": "Nowa zakładka"
+  },
+  "BOOKMARK_DETAILS": {
+    "NAME": "Nazwa",
+    "NAVIGATE": "Otwórz",
+    "OPEN_IN_NEW_TAB": "Zakładka otworzy się w nowym oknie",
+    "URL": "Adres URL"
+  },
+  "BOOKMARK_LIST": {
+    "BOOKMARK_DELETED": "Zakładka została usunięta.",
+    "TITLE": "Zakładki"
+  },
+  "COMMON": {
+    "CANCEL": "Anuluj",
+    "CREATE": "Utwórz",
+    "DELETE": "Usuń",
+    "ENTITY_TYPES": {
+      "BOOKMARK": "zakładkę",
+      "GROUP": "grupę"
+    },
+    "NO": "Nie",
+    "UNASSIGNED": "Bez grupy",
+    "YES": "Tak"
+  },
+  "CONFIRMATION_DIALOG": {
+    "CONTENT": "Czy na pewno chcesz usunąć {{ entityType }} <b>{{ entityName }}</b>?",
+    "TITLE": "Usuń {{entityType}}"
+  },
+  "GROUP_LIST": {
+    "GROUP_DELETED": "Grupa została usunięta.",
+    "TITLE": "Zarządzanie grupami"
+  },
+  "NAVBAR": {
+    "ADD_BOOKMARK": "Dodaj zakładkę",
+    "APP_TITLE": "Moje zakładki",
+    "HOME": "Start",
+    "MANAGE_GROUPS": "Grupy",
+    "MENU": "Menu"
+  },
+  "NOT_FOUND": {
+    "MESSAGE": "Wygląda na to, że podana strona <b>nie istnieje</b>.",
+    "TITLE": "Ups!"
+  }
+}
+
