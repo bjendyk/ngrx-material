@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AddBookmarkComponent } from './add-bookmark.component';
 import { BookmarkService } from '../../services/bookmark.service';
@@ -24,7 +25,7 @@ describe('AddBookmarkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LibraryImportsModule, NoopAnimationsModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule, TranslateModule.forRoot() ],
       declarations: [ AddBookmarkComponent ],
       providers: [
         { provide: BookmarkService, useValue: bookmarkServiceStub },

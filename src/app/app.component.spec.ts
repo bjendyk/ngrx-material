@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -9,7 +10,7 @@ import { LibraryImportsModule } from './library-imports.module';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LibraryImportsModule, NoopAnimationsModule, RouterTestingModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot() ],
       declarations: [ AppComponent, NavbarComponent ]
     }).compileComponents();
   }));

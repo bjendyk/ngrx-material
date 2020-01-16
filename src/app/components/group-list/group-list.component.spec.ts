@@ -2,6 +2,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { GroupListComponent } from './group-list.component';
 import { LibraryImportsModule } from '../../library-imports.module';
@@ -17,7 +18,7 @@ describe('GroupListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LibraryImportsModule, NoopAnimationsModule, RouterTestingModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot() ],
       declarations: [ GroupListComponent ],
       providers: [
         { provide: GroupService, useValue: groupServiceStub }
@@ -36,6 +37,10 @@ describe('GroupListComponent', () => {
       dialogResult = true;
     });
   }));
+
+  afterEach(() => {
+    groupServiceStub.deleteGroup.calls.reset();
+  });
 
   it('should be created', () => {
     expect(component).toBeTruthy();

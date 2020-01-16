@@ -1,6 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Bookmark } from '../../model/bookmark.entity';
 import { BookmarkDetailsComponent } from './bookmark-details.component';
@@ -19,7 +20,7 @@ describe('BookmarkDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LibraryImportsModule, NoopAnimationsModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule, TranslateModule.forRoot() ],
       declarations: [ BookmarkDetailsComponent ]
     })
     .compileComponents().then(() => {

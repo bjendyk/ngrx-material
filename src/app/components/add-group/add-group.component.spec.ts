@@ -2,6 +2,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AddGroupComponent } from './add-group.component';
 import { LibraryImportsModule } from '../../library-imports.module';
@@ -18,7 +19,7 @@ describe('AddGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LibraryImportsModule, NoopAnimationsModule ],
+      imports: [ LibraryImportsModule, NoopAnimationsModule, TranslateModule.forRoot() ],
       declarations: [ AddGroupComponent ],
       providers: [
         { provide: GroupService, useValue: groupServiceStub },
