@@ -17,12 +17,6 @@ describe('GroupService', () => {
     expect(selectSpy).toHaveBeenCalled();
   });
 
-  it('getFirstGroup() should select the data from the store', () => {
-    svc.getFirstGroup();
-    expect(storeStub.pipe).toHaveBeenCalled();
-    expect(selectSpy).toHaveBeenCalled();
-  });
-
   it('createGroup() should dispatch the store message', () => {
     const groupName = 'group';
     svc.createGroup(groupName);

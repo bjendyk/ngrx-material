@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { Bookmark } from '../model/bookmark.entity';
-import { selectAllGroups, selectFirstGroup, selectGroupByName } from '../store/selectors';
+import { selectAllGroups, selectGroupByName } from '../store/selectors';
 import { BookmarkActions, GroupActions } from '../store/actions';
 
 @Injectable()
@@ -11,10 +11,6 @@ export class GroupService {
 
   getGroups(includeUnassigned: boolean) {
     return this.store.pipe(select(selectAllGroups, { includeUnassigned }));
-  }
-
-  getFirstGroup() {
-    return this.store.pipe(select(selectFirstGroup));
   }
 
   getGroupsByName(name: string) {

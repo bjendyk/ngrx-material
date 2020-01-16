@@ -16,7 +16,7 @@ import { AbstractComponent } from '../abstract/abstract.component';
 })
 export class BookmarkListComponent extends AbstractComponent implements OnInit {
   bookmarks$: Observable<Bookmark[]>;
-  groups$: Observable<string[]>;
+  groups: string[];
   currentGroup: string;
 
   constructor(private bookmarkService: BookmarkService,
@@ -27,16 +27,16 @@ export class BookmarkListComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupService.getFirstGroup().subscribe((group) => {
-      this.currentGroup = group;
+    this.groupService.getGroups(true).subscribe((groups) => {
+      this.groups = groups;
+      this.currentGroup = groups[0];
+      this.getBookmarks(0);
     });
-    this.groups$ = this.groupService.getGroups(true);
-    this.getBookmarks();
   }
 
   onTabChange(event) {
     this.currentGroup = event.tab.textLabel;
-    this.getBookmarks();
+    this.getBookmarks(event.index);
   }
 
   onDelete(bookmark: Bookmark) {
@@ -46,7 +46,8 @@ export class BookmarkListComponent extends AbstractComponent implements OnInit {
     });
   }
 
-  getBookmarks() {
-    this.bookmarks$ = this.bookmarkService.getBookmarks(this.currentGroup);
+  getBookmarks(groupIndex: number) {
+    const isUnassignedGroup = groupIndex === this.groups.length - 1;
+    this.bookmarks$ = this.bookmarkService.getBookmarks(isUnassignedGroup ? 'unassigned' : this.currentGroup);
   }
 }

@@ -32,9 +32,8 @@ const bookmarks: Bookmark[] = [
 const bookmarkServiceStub = jasmine.createSpyObj('BookmarkService', ['getBookmarks', 'deleteBookmark', 'getGroupNames']);
 bookmarkServiceStub.getBookmarks.and.returnValue(of(bookmarks));
 
-const groupServiceStub = jasmine.createSpyObj('GroupService', ['getGroups', 'getFirstGroup']);
-groupServiceStub.getGroups.and.returnValue(of(['Personal', 'Work', 'Leisure']));
-groupServiceStub.getFirstGroup.and.returnValue(of('Personal'));
+const groupServiceStub = jasmine.createSpyObj('GroupService', ['getGroups']);
+groupServiceStub.getGroups.and.returnValue(of(['Personal', 'Work', 'Leisure', 'unassigned']));
 
 describe('BookmarkListComponent', () => {
   let component;
@@ -63,6 +62,11 @@ describe('BookmarkListComponent', () => {
   });
 
   it('ngOnInit() should initialize the component data', () => {
+    expect(component.groups[0]).toEqual('Personal');
+    expect(component.groups[1]).toEqual('Work');
+    expect(component.groups[2]).toEqual('Leisure');
+    expect(component.groups[3]).toEqual('unassigned');
+    expect(component.currentGroup).toEqual('Personal');
 
     component.bookmarks$.subscribe((result) => {
       expect(result.length).toEqual(3);
@@ -70,29 +74,32 @@ describe('BookmarkListComponent', () => {
       expect(result[1].name).toEqual('bookmark 2');
       expect(result[2].name).toEqual('bookmark 3');
     });
-
-    component.groups$.subscribe((result) => {
-      expect(result.length).toEqual(3);
-      expect(result[0]).toEqual('Personal');
-      expect(result[1]).toEqual('Work');
-      expect(result[2]).toEqual('Leisure');
-    });
-
-    expect(component.currentGroup).toEqual('Personal');
   });
 
-  it('getBookmarks() should set the bookmarks$ observable', () => {
-    component.bookmarks$ = undefined;
-    component.getBookmarks();
+  describe('getBookmarks()', () => {
+    beforeEach(() => {
+      bookmarkServiceStub.getBookmarks.calls.reset();
+    });
 
-    expect(bookmarkServiceStub.getBookmarks).toHaveBeenCalledWith(component.currentGroup);
-    expect(component.bookmarks$).toBeDefined();
+    it('should set the bookmarks$ observable', () => {
+      component.bookmarks$ = undefined;
+      component.getBookmarks(0);
 
-    component.bookmarks$.subscribe((result) => {
-      expect(result.length).toEqual(3);
-      expect(result[0].name).toEqual('bookmark 1');
-      expect(result[1].name).toEqual('bookmark 2');
-      expect(result[2].name).toEqual('bookmark 3');
+      expect(bookmarkServiceStub.getBookmarks).toHaveBeenCalledWith(component.currentGroup);
+      expect(component.bookmarks$).toBeDefined();
+
+      component.bookmarks$.subscribe((result) => {
+        expect(result.length).toEqual(3);
+        expect(result[0].name).toEqual('bookmark 1');
+        expect(result[1].name).toEqual('bookmark 2');
+        expect(result[2].name).toEqual('bookmark 3');
+      });
+    });
+
+    it('should pass the string `unassigned` if the group index equals the last group', () => {
+      console.log(component.groups);
+      component.getBookmarks(3);
+      expect(bookmarkServiceStub.getBookmarks).toHaveBeenCalledWith('unassigned');
     });
   });
 
